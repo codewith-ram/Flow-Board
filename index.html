@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowBoard - Workflow Visualizer</title>
+    <meta name="description" content="A powerful visual workflow builder and execution engine.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/styles.css">
+    <!-- Icons (Phosphor Icons for a clean look) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- Top Toolbar -->
+        <header class="toolbar glass">
+            <div class="logo">
+                <i class="ph ph-flow-arrow"></i>
+                <span>FlowBoard</span>
+            </div>
+
+            <div class="controls">
+                <button id="btn-undo" class="icon-btn" title="Undo (Ctrl+Z)" disabled>
+                    <i class="ph ph-arrow-u-up-left"></i>
+                </button>
+                <button id="btn-redo" class="icon-btn" title="Redo (Ctrl+Y)" disabled>
+                    <i class="ph ph-arrow-u-up-right"></i>
+                </button>
+                <span class="divider"></span>
+                <button id="btn-clear" class="icon-btn" title="Clear Canvas">
+                    <i class="ph ph-trash"></i>
+                </button>
+                <button id="btn-save" class="icon-btn" title="Save Workflow">
+                    <i class="ph ph-floppy-disk"></i>
+                </button>
+                <span class="divider"></span>
+                <div class="execution-controls">
+                    <button id="btn-play" class="primary-btn">
+                        <i class="ph ph-play"></i> Run
+                    </button>
+                    <button id="btn-pause" class="secondary-btn" title="Pause" disabled>
+                        <i class="ph ph-pause"></i>
+                    </button>
+                    <button id="btn-reset" class="secondary-btn" title="Reset" disabled>
+                        <i class="ph ph-arrow-counter-clockwise"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="status-bar" id="status-bar">Ready</div>
+        </header>
+
+        <div class="main-layout">
+            <!-- Left Sidebar: Palette -->
+            <aside class="sidebar glass">
+                <div class="sidebar-header">
+                    <h3>Components</h3>
+                    <p>Drag to canvas</p>
+                </div>
+                <div class="palette">
+                    <div class="draggable-block start" draggable="true" data-type="start">
+                        <i class="ph ph-play-circle"></i>
+                        <span>Start</span>
+                    </div>
+                    <div class="draggable-block task" draggable="true" data-type="task">
+                        <i class="ph ph-gear"></i>
+                        <span>Task</span>
+                    </div>
+                    <div class="draggable-block decision" draggable="true" data-type="decision">
+                        <i class="ph ph-git-branch"></i>
+                        <span>Decision</span>
+                    </div>
+                    <div class="draggable-block end" draggable="true" data-type="end">
+                        <i class="ph ph-stop-circle"></i>
+                        <span>End</span>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Workflows</h3>
+                    <ul id="saved-workflows-list">
+                        <!-- Populated by JS -->
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Main Canvas Area -->
+            <main class="canvas-container" id="canvas-container">
+                <div class="canvas-layer" id="canvas-layer">
+                    <!-- SVG Layer for connections -->
+                    <svg id="connections-layer">
+                        <!-- Paths injected via JS -->
+                    </svg>
+                    <!-- Nodes injected via JS -->
+                    <div id="nodes-layer"></div>
+                </div>
+
+                <!-- Bottom Logs Panel -->
+                <div id="logs-panel" class="logs-panel glass">
+                    <div class="panel-header">
+                        <span><i class="ph ph-terminal-window"></i> Execution Logs</span>
+                        <button id="btn-clear-logs" class="icon-btn-small"><i class="ph ph-trash"></i></button>
+                    </div>
+                    <div id="logs-content"></div>
+                </div>
+            </main>
+
+            <!-- Right Sidebar: Properties -->
+            <aside class="sidebar right-sidebar glass" id="properties-panel">
+                <div class="sidebar-header">
+                    <h3>Properties</h3>
+                    <p id="prop-node-type">Select a node</p>
+                </div>
+                <div id="prop-content" class="prop-content">
+                    <div class="empty-state">No node selected</div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Modules -->
+    <script type="module" src="./src/main.js"></script>
+
+    <!-- Context Menu (Hidden by default) -->
+    <div id="context-menu" class="context-menu">
+        <div class="context-menu-item" id="cm-duplicate">
+            <i class="ph ph-copy"></i> Duplicate
+        </div>
+        <div class="context-menu-divider"></div>
+        <div class="context-menu-item" id="cm-delete">
+            <i class="ph ph-trash"></i> Delete
+        </div>
+    </div>
+</body>
+
+</html>
