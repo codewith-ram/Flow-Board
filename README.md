@@ -1,4 +1,5 @@
 # FlowBoard 
+**[Live Demo](https://flowbooard.netlify.app/)** 🚀
 
 **FlowBoard** is a modern, lightweight, visual workflow automation tool built entirely with **Vanilla JavaScript**. It offers a "Zero-Dependency" architecture, meaning it runs directly in the browser without complex build steps or frameworks.
 
