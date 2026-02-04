@@ -44,7 +44,7 @@ FlowBoard/
 │       └── dom.js      # Helpers for SVG curves and DOM manipulation
 ```
 
-## 🛠️ How It Works
+## How It Works
 
 1. **State Management**: Uses a custom "Redux-like" store to manage application state (nodes, connections) with immutable history for reliable Undo/Redo.
 2. **Rendering**: Nodes are DOM elements for accessibility and ease of styling, while connections are drawn using SVG Bezier curves for smooth visuals.
